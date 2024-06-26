@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 07/06/2024 às 17:44
--- Versão do servidor: 10.4.28-MariaDB
--- Versão do PHP: 8.2.4
+-- Tempo de geração: 27/06/2024 às 01:22
+-- Versão do servidor: 10.4.32-MariaDB
+-- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `produtoravinho`
 --
+CREATE DATABASE IF NOT EXISTS `produtoravinho` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `produtoravinho`;
 
 -- --------------------------------------------------------
 
@@ -32,6 +34,18 @@ CREATE TABLE `casta` (
   `casta` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `casta`
+--
+
+INSERT INTO `casta` (`codcasta`, `casta`) VALUES
+(1, 'Touriga Nacional'),
+(2, 'Tinta Roriz'),
+(3, 'Verdíquio'),
+(4, 'Pinotaje'),
+(5, 'Sandiovése'),
+(6, 'Tcharêlo');
+
 -- --------------------------------------------------------
 
 --
@@ -42,6 +56,18 @@ CREATE TABLE `casta_vinho` (
   `codvinho` int(11) DEFAULT NULL,
   `codcasta` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `casta_vinho`
+--
+
+INSERT INTO `casta_vinho` (`codvinho`, `codcasta`) VALUES
+(6, 1),
+(5, 2),
+(4, 3),
+(3, 4),
+(2, 5),
+(1, 6);
 
 -- --------------------------------------------------------
 
@@ -63,8 +89,12 @@ CREATE TABLE `produtor` (
 --
 
 INSERT INTO `produtor` (`idprodutor`, `nomeprodutor`, `moradaprodutor`, `telefone`, `email`, `codregiao`) VALUES
-(1, 'Qt. Vallado', 'Régua', '254323147', 'vallado@mail.telepac.pt', 1),
-(3, 'Finagra', 'Reguengos', '266509270', 'esporao@esporao.com', 2);
+(1, 'Vallado', 'Rio Grande', '254323147', 'vallado@mail.telepac.pt', 1),
+(2, 'Sheila', 'São Paulo', '785347839', 'sheila@mail.telepac.pt', 2),
+(3, 'Rapha', 'Rio de Janeiro', '8459637712', 'rapha@mail.telepac.pt', 3),
+(4, 'Caetano', 'Santa Catarina', '875963258', 'caetano@mail.telepac.pt', 4),
+(5, 'Carol', 'Marranhão', '132323123', 'Carol@mail.telepac.pt', 5),
+(6, 'Aline', 'Costa Rica', '259351397', 'aline@mail.telepac.pt', 6);
 
 -- --------------------------------------------------------
 
@@ -82,12 +112,12 @@ CREATE TABLE `regiao` (
 --
 
 INSERT INTO `regiao` (`idregiao`, `descriregiao`) VALUES
-(1, 'Dão'),
-(2, 'Alenteijo'),
-(3, 'Douro'),
-(4, 'Etec'),
-(5, 'Fazenda da etec'),
-(7, 'Fazenda Sul cintia');
+(1, 'Douro'),
+(2, 'Alentejo'),
+(3, 'Dão'),
+(4, 'São Francisco'),
+(5, 'Campo Verde'),
+(6, 'Julista');
 
 -- --------------------------------------------------------
 
@@ -104,6 +134,18 @@ CREATE TABLE `vinho` (
   `preco` decimal(7,2) DEFAULT NULL,
   `codprodutor` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `vinho`
+--
+
+INSERT INTO `vinho` (`idvinho`, `nomevinho`, `ano_vinho`, `cor`, `grau`, `preco`, `codprodutor`) VALUES
+(1, 'Esporão Reserva', 2004, 'Tinto', 14.50, 18.50, 6),
+(2, 'Quinta do Vallado', 1995, 'Tinto', 15.00, 39.00, 5),
+(3, 'Muros Antigos', 2020, 'Branco', 7.00, 81.00, 4),
+(4, 'Tranqueiro', 1982, 'Tinto', 9.00, 43.00, 3),
+(5, 'Mercurio', 1803, 'Tinto', 14.00, 80.00, 2),
+(6, 'Post', 1999, 'Branco', 10.00, 18.00, 1);
 
 --
 -- Índices para tabelas despejadas
@@ -151,25 +193,25 @@ ALTER TABLE `vinho`
 -- AUTO_INCREMENT de tabela `casta`
 --
 ALTER TABLE `casta`
-  MODIFY `codcasta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codcasta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `produtor`
 --
 ALTER TABLE `produtor`
-  MODIFY `idprodutor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idprodutor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `regiao`
 --
 ALTER TABLE `regiao`
-  MODIFY `idregiao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idregiao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `vinho`
 --
 ALTER TABLE `vinho`
-  MODIFY `idvinho` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idvinho` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restrições para tabelas despejadas
