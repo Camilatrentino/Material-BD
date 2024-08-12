@@ -1,0 +1,56 @@
+
+CREATE TABLE proprietario (
+idproprietario int(11) PRIMARY KEY,
+email varchar(255),
+cpf varchar(255),
+rg varchar(255),
+nome varchar(255),
+telefone int(11)
+)
+
+CREATE TABLE fiador (
+idfiador int(11) PRIMARY KEY,
+cpf varchar(255),
+telefone int(11),
+nome varchar(255),
+rg varchar(255),
+email varchar(255)
+)
+
+CREATE TABLE endereco (
+idendereco int(11) PRIMARY KEY,
+bairro varchar(255),
+rua varchar(255),
+complemento varchar(255),
+numero int(11),
+estado varchar(255),
+cep varchar(255),
+cidade varchar(255),
+idproprietario int(11),
+idfiador int(11),
+idimovel int(11),
+FOREIGN KEY(idproprietario) REFERENCES proprietario (idproprietario),
+FOREIGN KEY(idfiador) REFERENCES fiador (idfiador)
+)
+
+CREATE TABLE imovel (
+tipo varchar(255),
+comodos int(11),
+suite bit,
+area int(11),
+nvagas int(11),
+nbanheiros int(11),
+idimovel int(11) PRIMARY KEY,
+complemento varchar(255),
+piscina bit,
+alugado bit,
+garagem bit,
+idproprietario int(11),
+FOREIGN KEY(idproprietario) REFERENCES proprietario (idproprietario)
+)
+
+CREATE TABLE corretor (
+idcorretor int(11) PRIMARY KEY,
+email varchar(255),
+telefone int(11),
+nome varchar(255))
